@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Валюта 1</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="currency1">
+        <option *ngFor="let currency of listCurrencies" [value]="currency.id">{{ currency.currencyName }}</option>
+      </select>
+      <input type="number" class="form-control" placeholder="Количество" [(ngModel)]="amountFrom">
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect02">Валюта 2</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelect02" [(ngModel)]="currency2">
+        <option *ngFor="let currency of listCurrencies" [value]="currency.id">{{ currency.currencyName }}</option>
+      </select>
+      <input type="number" class="form-control" placeholder="Количество" [value]="amountTo | number" disabled>
+    </div>
+  </div>
+
+  <div class="col-md-12 text-center">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Конвертация</button>
+  </div>
+</div>
