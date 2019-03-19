@@ -41,10 +41,10 @@ export class AppComponent implements OnInit {
 
   private localStorageKey = 'app-components';
 
-  constructor(private ajax: AjaxService, private localStorage: LocalStorageService) {}
+  constructor(private ajax: AjaxService) {}
 
   ngOnInit(): void {
-    const storedComponents = this.localStorage.getItem(this.localStorageKey);
+    const storedComponents = LocalStorageService.getItem(this.localStorageKey);
 
     // если есть сохраненные данные - использовать их
     if (storedComponents.length) {
@@ -73,19 +73,19 @@ export class AppComponent implements OnInit {
       currency2: '',
     });
 
-    this.localStorage.setItem(this.localStorageKey, this.components);
+    LocalStorageService.setItem(this.localStorageKey, this.components);
   }
 
   onChangeCurrency(index: number, {key, value}: ChangeCurrency) {
     const components = [...this.components];
     components[index][key] = value;
 
-    this.localStorage.setItem(this.localStorageKey, components);
+    LocalStorageService.setItem(this.localStorageKey, components);
   }
 
   onDeleteRow(index) {
     this.components.splice(index, 1);
 
-    this.localStorage.setItem(this.localStorageKey, this.components);
+    LocalStorageService.setItem(this.localStorageKey, this.components);
   }
 }

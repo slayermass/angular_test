@@ -28,6 +28,7 @@ export class CurrencyConverterComponent {
     this.ajax.doConvert(this.currency1, this.currency2)
       .subscribe(data => {
         this.amountTo = data[`${this.currency1}_${this.currency2}`] * this.amountFrom;
+        console.log(this.amountTo);
       });
   }
 
