@@ -76,7 +76,7 @@ export class AppComponent implements OnInit {
     this.localStorage.setItem(this.localStorageKey, this.components);
   }
 
-  onChangeCurrency({index, key, value}: ChangeCurrency) {
+  onChangeCurrency(index: number, {key, value}: ChangeCurrency) {
     const components = [...this.components];
     components[index][key] = value;
 

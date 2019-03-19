@@ -3,7 +3,6 @@ import {ListCurrencies} from '../app.component';
 import {AjaxService} from '../ajax.service';
 
 export interface ChangeCurrency {
-  index: number;
   key: string;
   value: string;
 }
@@ -16,10 +15,9 @@ export class CurrencyConverterComponent {
   @Input() listCurrencies: ListCurrencies[];
   @Input() currency1: string;
   @Input() currency2: string;
-  @Input() index: number;
 
   @Output() changeCurrency = new EventEmitter<ChangeCurrency>();
-  @Output() deletRow = new EventEmitter<number>();
+  @Output() deletRow = new EventEmitter();
 
   amountFrom = 1;
   amountTo = 0;
@@ -34,10 +32,10 @@ export class CurrencyConverterComponent {
   }
 
   onChange(key: string, value: string) {
-    this.changeCurrency.emit({ index: this.index, key, value });
+    this.changeCurrency.emit({ key, value });
   }
 
   onDeleteRow() {
-    this.deletRow.emit(this.index);
+    this.deletRow.emit();
   }
 }

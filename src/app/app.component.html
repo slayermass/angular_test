@@ -4,9 +4,8 @@
     [listCurrencies]="listCurrencies"
     currency1="{{ cur.currency1 }}"
     currency2="{{ cur.currency2 }}"
-    (changeCurrency)="onChangeCurrency($event)"
-    (deletRow)="onDeleteRow($event)"
-    [index]="i"
+    (changeCurrency)="onChangeCurrency(i, $event)"
+    (deletRow)="onDeleteRow(i)"
   ></app-currency-converter>
 
   <hr>
