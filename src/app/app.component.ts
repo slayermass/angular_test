@@ -9,12 +9,17 @@ export interface ListCurrencies {
   currencySymbol: string;
 }
 
-interface Test {
+interface AjaxData {
   [id: string]: {
     currencyName: string;
     currencySymbol: string;
     id: string;
   };
+}
+
+interface CurrencyComponentData {
+  currency1: string;
+  currency2: string;
 }
 
 @Component({
@@ -24,7 +29,7 @@ interface Test {
 })
 export class AppComponent implements OnInit {
   listCurrencies: ListCurrencies[] = [];
-  components = [
+  components: CurrencyComponentData[] = [
     {
       currency1: 'USD',
       currency2: 'RUB',
@@ -46,7 +51,7 @@ export class AppComponent implements OnInit {
       this.components = storedComponents;
     }
 
-    this.ajax.getListCurrencies().subscribe((data: Test) => {
+    this.ajax.getListCurrencies().subscribe((data: AjaxData) => {
       const arr: ListCurrencies[] = [];
 
       // в удобную структуру
