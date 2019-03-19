@@ -4,7 +4,8 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="inputGroupSelect01">Валюта 1</label>
       </div>
-      <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="currency1">
+      <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="currency1" (ngModelChange)="onChange('currency1', $event)">
+        <option value="" style="display: none">Выберите</option>
         <option *ngFor="let currency of listCurrencies" [value]="currency.id">{{ currency.currencyName }}</option>
       </select>
       <input type="number" class="form-control" placeholder="Количество" [(ngModel)]="amountFrom">
@@ -16,7 +17,8 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="inputGroupSelect02">Валюта 2</label>
       </div>
-      <select class="custom-select" id="inputGroupSelect02" [(ngModel)]="currency2">
+      <select class="custom-select" id="inputGroupSelect02" [(ngModel)]="currency2" (ngModelChange)="onChange('currency2', $event)">
+        <option value="" style="display: none">Выберите</option>
         <option *ngFor="let currency of listCurrencies" [value]="currency.id">{{ currency.currencyName }}</option>
       </select>
       <input type="number" class="form-control" placeholder="Количество" [value]="amountTo | number" disabled>
@@ -24,6 +26,13 @@
   </div>
 
   <div class="col-md-12 text-center">
-    <button type="submit" class="btn btn-primary" (click)="onSubmit()">Конвертация</button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      (click)="onSubmit()"
+      [disabled]="!currency1.length || !currency2.length"
+    >
+      Конвертация {{ currency1 }} в {{ currency2 }}
+    </button>
   </div>
 </div>

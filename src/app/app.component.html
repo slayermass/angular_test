@@ -1,4 +1,15 @@
 <div class="container">
-  <app-currency-converter [listCurrencies]="listCurrencies" currency1="{{ 'USD' }}" currency2="{{ 'RUB' }}"></app-currency-converter>
-  <app-currency-converter [listCurrencies]="listCurrencies" currency1="{{ 'EUR' }}" currency2="{{ 'RUB' }}"></app-currency-converter>
+  <app-currency-converter
+    *ngFor="let cur of components; let i = index"
+    [listCurrencies]="listCurrencies"
+    currency1="{{ cur.currency1 }}"
+    currency2="{{ cur.currency2 }}"
+    (changeCurrency)="onChangeCurrency($event)"
+    index="{{ i }}"
+  ></app-currency-converter>
+
+  <hr>
+  <div class="col-md-12 text-center">
+    <button type="button" (click)="addComponent()" class="btn btn-primary">Добавить конвертер</button>
+  </div>
 </div>

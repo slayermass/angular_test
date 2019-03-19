@@ -1,7 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {ListCurrencies} from '../app.component';
 import {AjaxService} from '../ajax.service';
 
+export interface ChangeCurrency {
+  index: number;
+  key: string;
+  value: string;
+}
 @Component({
   selector: 'app-currency-converter',
   templateUrl: './currency-converter.component.html',
@@ -11,6 +16,9 @@ export class CurrencyConverterComponent {
   @Input() listCurrencies: ListCurrencies[];
   @Input() currency1: string;
   @Input() currency2: string;
+  @Input() index: number;
+
+  @Output() changeCurrency = new EventEmitter<ChangeCurrency>();
 
   amountFrom = 1;
   amountTo = 0;
@@ -22,5 +30,9 @@ export class CurrencyConverterComponent {
       .subscribe(data => {
         this.amountTo = data[`${this.currency1}_${this.currency2}`] * this.amountFrom;
       });
+  }
+
+  onChange(key: string, value: string) {
+    this.changeCurrency.emit({ index: Number(this.index), key, value });
   }
 }
