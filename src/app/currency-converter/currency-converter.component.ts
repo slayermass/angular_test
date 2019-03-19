@@ -34,10 +34,10 @@ export class CurrencyConverterComponent {
   }
 
   onChange(key: string, value: string) {
-    this.changeCurrency.emit({ index: Number(this.index), key, value });
+    this.changeCurrency.emit({ index: this.index, key, value });
   }
 
   onDeleteRow() {
-    this.deletRow.emit(Number(this.index));
+    this.deletRow.emit(this.index);
   }
 }
