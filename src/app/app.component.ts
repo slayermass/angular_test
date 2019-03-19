@@ -39,7 +39,12 @@ export class AppComponent implements OnInit {
   constructor(private ajax: AjaxService, private localStorage: LocalStorageService) {}
 
   ngOnInit(): void {
-    this.components = this.localStorage.getItem(this.localStorageKey);
+    const storedComponents = this.localStorage.getItem(this.localStorageKey);
+
+    // если есть сохраненные данные - использовать их
+    if (storedComponents.length) {
+      this.components = storedComponents;
+    }
 
     this.ajax.getListCurrencies().subscribe((data: Test) => {
       const arr: ListCurrencies[] = [];
@@ -71,5 +76,11 @@ export class AppComponent implements OnInit {
     components[index][key] = value;
 
     this.localStorage.setItem(this.localStorageKey, components);
+  }
+
+  onDeleteRow(index) {
+    this.components.splice(index, 1);
+
+    this.localStorage.setItem(this.localStorageKey, this.components);
   }
 }

@@ -19,6 +19,7 @@ export class CurrencyConverterComponent {
   @Input() index: number;
 
   @Output() changeCurrency = new EventEmitter<ChangeCurrency>();
+  @Output() deletRow = new EventEmitter<number>();
 
   amountFrom = 1;
   amountTo = 0;
@@ -34,5 +35,9 @@ export class CurrencyConverterComponent {
 
   onChange(key: string, value: string) {
     this.changeCurrency.emit({ index: Number(this.index), key, value });
+  }
+
+  onDeleteRow() {
+    this.deletRow.emit(Number(this.index));
   }
 }

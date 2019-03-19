@@ -26,13 +26,20 @@
   </div>
 
   <div class="col-md-12 text-center">
-    <button
-      type="submit"
-      class="btn btn-primary"
-      (click)="onSubmit()"
-      [disabled]="!currency1.length || !currency2.length"
-    >
-      Конвертация {{ currency1 }} в {{ currency2 }}
-    </button>
+    <div class="btn-group" role="group">
+      <button
+        type="submit"
+        class="btn btn-outline-primary"
+        (click)="onSubmit()"
+        [disabled]="!currency1.length || !currency2.length"
+      >
+        {{
+          (!currency1.length || !currency2.length)
+            ? 'Выберите валюты'
+            : 'Конвертация ' + currency1 + ' в ' + currency2 // не понял, не дает шаблонные строки использовать
+        }}
+      </button>
+      <button class="btn btn-outline-danger" (click)="onDeleteRow()">Удалить строку</button>
+    </div>
   </div>
 </div>
