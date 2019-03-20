@@ -2,25 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AjaxService } from './ajax.service';
 import {LocalStorageService} from './local-storage.service';
 import {ChangeCurrency} from './currency-converter/currency-converter.component';
-
-export interface ListCurrencies {
-  currencyName: string;
-  id: string;
-  currencySymbol: string;
-}
-
-interface AjaxData {
-  [id: string]: {
-    currencyName: string;
-    currencySymbol: string;
-    id: string;
-  };
-}
-
-interface CurrencyComponentData {
-  currency1: string;
-  currency2: string;
-}
+import {ListCurrencies} from './interfaces/ListCurrencies';
+import {CurrencyComponentData} from './interfaces/CurrencyComponentData';
 
 @Component({
   selector: 'app-root',
@@ -47,23 +30,12 @@ export class AppComponent implements OnInit {
     const storedComponents = LocalStorageService.getItem(this.localStorageKey);
 
     // если есть сохраненные данные - использовать их
-    if (storedComponents.length) {
+    if (storedComponents && storedComponents.length) {
       this.components = storedComponents;
     }
 
-    this.ajax.getListCurrencies().subscribe((data: AjaxData) => {
-      const arr: ListCurrencies[] = [];
-
-      // в удобную структуру
-      Object.entries(data).map(([_, value]) => {
-        arr.push({
-          currencyName: value.currencyName,
-          currencySymbol: value.currencySymbol,
-          id: value.id,
-        });
-      });
-
-      this.listCurrencies = arr;
+    this.ajax.getListCurrencies().subscribe((data: ListCurrencies[]) => {
+      this.listCurrencies = data;
     });
   }
 

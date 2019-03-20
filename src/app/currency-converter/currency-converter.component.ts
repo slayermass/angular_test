@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {ListCurrencies} from '../app.component';
 import {AjaxService} from '../ajax.service';
+import {ListCurrencies} from '../interfaces/ListCurrencies';
 
 export interface ChangeCurrency {
   key: string;
@@ -28,7 +28,6 @@ export class CurrencyConverterComponent {
     this.ajax.doConvert(this.currency1, this.currency2)
       .subscribe(data => {
         this.amountTo = data[`${this.currency1}_${this.currency2}`] * this.amountFrom;
-        console.log(this.amountTo);
       });
   }
 
@@ -37,6 +36,8 @@ export class CurrencyConverterComponent {
   }
 
   onDeleteRow() {
-    this.deletRow.emit();
+    if (confirm('Действительно удалить?')) { // просто и понятно
+      this.deletRow.emit();
+    }
   }
 }
