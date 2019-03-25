@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import {AjaxData} from './interfaces/AjaxData';
+import {AjaxData} from '../interfaces/AjaxData';
 
 @Injectable({
   providedIn: 'root'

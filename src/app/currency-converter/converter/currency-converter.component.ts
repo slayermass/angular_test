@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {AjaxService} from '../ajax.service';
-import {ListCurrencies} from '../interfaces/ListCurrencies';
+import {ListCurrencies} from '../../interfaces/ListCurrencies';
+import {AjaxService} from '../../services/ajax.service';
 
 export interface ChangeCurrency {
   key: string;
