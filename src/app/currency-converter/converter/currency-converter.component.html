@@ -8,7 +8,7 @@
         <option value="" style="display: none">Выберите</option>
         <option *ngFor="let currency of listCurrencies" [value]="currency.id">{{ currency.currencyName }}</option>
       </select>
-      <input type="number" class="form-control" placeholder="Количество" [(ngModel)]="amountFrom">
+      <input type="number" class="form-control" placeholder="Количество" [(ngModel)]="amountFrom" min="1">
     </div>
   </div>
 
