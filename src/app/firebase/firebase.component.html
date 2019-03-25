@@ -1,4 +1,4 @@
-<h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
+<h1 *ngIf="authService.user | async">Привет {{ (authService.user | async)?.email }}!</h1>
 
 <div *ngIf="!(authService.user | async)">
   <form [formGroup]="form" (ngSubmit)="login()">
@@ -10,7 +10,10 @@
         id="exampleInputEmail1"
         placeholder="Емейл"
         formControlName="email"
-        [ngClass]="{'is-invalid': form.get('email').invalid && form.get('email').touched}"
+        [ngClass]="{
+          'is-invalid': form.get('email').invalid && form.get('email').touched,
+          'is-valid': form.get('email').valid && form.get('email').touched
+        }"
       >
       <div class="invalid-feedback" *ngIf="form.get('email').invalid && form.get('email').touched">
         <span *ngIf="form.get('email').errors['email']">
@@ -29,7 +32,16 @@
         id="exampleInputPassword1"
         placeholder="Пароль"
         formControlName="password"
+        [ngClass]="{
+          'is-invalid': form.get('password').invalid && form.get('password').touched,
+          'is-valid': form.get('password').valid && form.get('password').touched
+        }"
       >
+      <div class="invalid-feedback" *ngIf="form.get('password').invalid && form.get('password').touched">
+      <span *ngIf="form.get('password').errors['required']">
+          Необходимо ввести пароль
+        </span>
+      </div>
     </div>
     <button type="submit" class="btn btn-primary" (click)="login()" [disabled]="form.invalid">Войти</button>
   </form>
