@@ -1,5 +1,9 @@
 <h1 *ngIf="authService.user | async">Привет {{ (authService.user | async)?.email }}!</h1>
 
+<div *ngIf="message" class="alert alert-{{ message.type }} mt-3">
+  {{ message.text }}
+</div>
+
 <div *ngIf="!(authService.user | async)">
   <form [formGroup]="form" (ngSubmit)="login()">
     <div class="form-group">
